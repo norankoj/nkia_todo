@@ -14,6 +14,13 @@ class App extends Component {
             list : [],
             checkNum : 0
         }
+        /*
+        list = [
+            { todoText: '할 일', index: 0, complete: true },
+            { todoText: '할 일2', index: 1, complete: false },
+            { todoText: '할 일3', index: 2, complete: false },
+        ]
+         */
     }
 
     inputValue(value) {
