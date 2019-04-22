@@ -1,6 +1,11 @@
 import React, {Component} from 'react';
 
 class TodoHeader extends Component {
+    shouldComponentUpdate(nextProps) {
+        if (this.props.todoText !== nextProps.todoText) return true;
+        return false;
+    }
+
     render() {
         const {
             logo,

@@ -20,8 +20,8 @@ class TodoContents extends Component {
                 <div className="todo_content">
                     <ul className="todo_myList">
                         {(todoItems && todoItems.length)
-                            ? todoItems.map((val) =>
-                            <li className="fix" key={val}>
+                            ? todoItems.map((val, index) =>
+                            <li className="fix" key={`${val}-${index}`}>
                                 <input type="checkbox"
                                        className="check"
                                        onClick={()=>onTodoComplete(val)}
