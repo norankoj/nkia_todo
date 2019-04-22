@@ -1,9 +1,6 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React, {Component} from 'react';
 import nkia from './nkia.png';
-import del from './delete.png';
 import './App.css';
-import {Promise as onReject} from "q";
 import TodoHeader from "./TodoHeader";
 import TodoContents from "./TodoContents";
 
@@ -26,29 +23,30 @@ class App extends Component {
         )
     }
     addInputValue(value) {
-        let listArray = this.state.list;
-        listArray.push(value);
+        this.setState((state) => {
+            return {
+                list: state.list.concat(value),
+                myMessage: ''
+            }
+        });
 
-        this.setState({
-            list: listArray,
-            myMessage: ''
-        })
 
     }
     handleTodoRemove = (val) => {
-        let list = this.state.list;
-        this.setState({
-            list : list.filter(num => num !== val)
-        })
+        this.setState((state) => {
+            return {
+                list: state.list.filter(todo => todo !== val)
+            }
+        });
+
     }
     handleTodoComplete = (val) => {
-        let list = this.state.list;
-
-        this.setState({
-            list : list.filter(num => num !== val),
-            checkNum : this.state.checkNum + 1
+        this.setState((state) => {
+            return {
+                list : state.list.filter(todo => todo !== val),
+                checkNum : state.checkNum + 1
+            }
         })
-
     }
 
     // arrowFunction = (인자) => 반환
@@ -61,7 +59,8 @@ class App extends Component {
             <div className="todo_list">
 
                 <TodoHeader logo={nkia} todoText={this.state.myMessage} onTodoChange={this.handleTodoChange} onTodoAdd={this.handleTodoAdd} />
-                <TodoContents todoItems={this.state.list} onTodoComplete={this.handleTodoComplete} onTodoRemove={this.handleTodoRemove}/>
+                <TodoContents todoItems={this.state.list} onTodoComplete={this.handleTodoComplete} onTodoRemove={this.handleTodoRemove}
+                              completeCount={this.state.checkNum}/>
             </div>
         );
     }
