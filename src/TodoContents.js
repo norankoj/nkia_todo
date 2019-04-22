@@ -26,7 +26,7 @@ class TodoContents extends Component {
                                        className="check"
                                        onClick={()=>onTodoComplete(val)}
                                 />
-                                &nbsp; {val} &nbsp;
+                                <span>{` ${val} `}</span>
                                 <img src={del}
                                      className="delCheck"
                                      onClick={() => onTodoRemove(val)}

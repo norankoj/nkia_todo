@@ -70,9 +70,13 @@ html{
   height: 25px;
   width: 25px;
 }
-.fix img{
+/* li 이자 flex 박스 */
+.fix {
   display: flex;
-
+}
+.fix span{
+  flex: 1;
+  text-align: left;
 }
 
 .App-logo {
