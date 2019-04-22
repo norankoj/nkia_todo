@@ -4,6 +4,8 @@ import nkia from './nkia.png';
 import del from './delete.png';
 import './App.css';
 import {Promise as onReject} from "q";
+import TodoHeader from "./TodoHeader";
+import TodoContents from "./TodoContents";
 
 class App extends Component {
 
@@ -11,7 +13,7 @@ class App extends Component {
         super(props);
 
         this.state = {
-            myMessage : null,
+            myMessage : '',
             list : [],
             checkNum : 0
         }
@@ -33,13 +35,13 @@ class App extends Component {
         })
 
     }
-    valRemove(val){
+    handleTodoRemove = (val) => {
         let list = this.state.list;
         this.setState({
             list : list.filter(num => num !== val)
         })
     }
-    check(val) {
+    handleTodoComplete = (val) => {
         let list = this.state.list;
 
         this.setState({
@@ -49,43 +51,17 @@ class App extends Component {
 
     }
 
+    // arrowFunction = (인자) => 반환
+    handleTodoChange = (e) => this.inputValue(e.target.value)
+
+    handleTodoAdd = () => this.addInputValue(this.state.myMessage)
 
     render() {
         return (
             <div className="todo_list">
-                <div className="todo_header">
-                    <img src={nkia} className="App-logo" alt="logo" />
-                    <input
-                        type="text"
-                        className="todo_input"
-                        value={this.state.myMessage}
-                        onChange={(e =>this.inputValue(e.target.value) )}
-                    />
-                    <button className="todo_button" onClick={()=>
-                        this.addInputValue(this.state.myMessage)
-                    }> save </button>
 
-                </div>
-                <div className="todo_content">
-                    <ul className="todo_myList">
-                        {this.state.list.map((val) =>
-                            <li className="fix">
-                                <input type="checkbox"
-                                       className="check"
-                                       onClick={()=>this.check(val)}
-                                />
-                                &nbsp; {val} &nbsp;
-                                <img src={del}
-                                     className="delCheck"
-                                     onClick={() => this.valRemove(val)}
-                                />
-                            </li>)}
-                    </ul>
-
-                </div>
-
-                <p>완료 수 : {this.state.checkNum} </p>
-
+                <TodoHeader logo={nkia} todoText={this.state.myMessage} onTodoChange={this.handleTodoChange} onTodoAdd={this.handleTodoAdd} />
+                <TodoContents todoItems={this.state.list} onTodoComplete={this.handleTodoComplete} onTodoRemove={this.handleTodoRemove}/>
             </div>
         );
     }
