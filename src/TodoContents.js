@@ -1,6 +1,7 @@
 import React, {Component, Fragment} from 'react';
 import del from "./delete.png";
 import PropTypes from "prop-types";
+import SFC from "./SFC";
 
 class TodoContents extends Component {
     static propTypes = {
@@ -33,7 +34,7 @@ class TodoContents extends Component {
                                 />
                             </li>)
                             :
-                            <li>할 일을 추가하세요.</li>
+                            <SFC value="할 일을 추가하세요."/>
                         }
                     </ul>
 
